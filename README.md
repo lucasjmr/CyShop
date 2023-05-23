@@ -14,7 +14,7 @@ Mi6 preing1
 
 Ofc.
 
-#### Is this code fabulous ?
+#### Is the code fabulous ?
 
 Ofc.
 
