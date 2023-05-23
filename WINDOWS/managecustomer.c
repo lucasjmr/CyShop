@@ -362,7 +362,7 @@ void search_and_buy(GPU *GPUarray, int client_number)
                             client_gpu_append(WantedGPU, client_number);
                             GPUarray[i].quantity -= 1;
                             overwrite_stock(GPUarray);
-                            printf("You successfully bought it for %d€, \xF8o\xF8\n", GPUarray[i].price);
+                            printf("You successfully bought it for %d euro, \xF8o\xF8\n", GPUarray[i].price);
                             answered = 1;
                         }
                         else
