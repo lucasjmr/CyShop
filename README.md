@@ -27,7 +27,7 @@ This project is used by the following companies:
 - Google
 - Microsoft
 - Not Apple, because Apple sucks
-
+(sources : trust me bro)
 
 ## Screenshots
 
