@@ -23,6 +23,7 @@ Ofc.
 
 This project is used by the following companies:
 
+- Amazon
 - Google
 - Microsoft
 - Not Apple, because Apple sucks
