@@ -4,7 +4,7 @@ void ask_string(char *string, int sizeofanswer, char *answer)
 {
     if (string == NULL || answer == NULL || sizeofanswer <= 0)
     {
-        printf("Parameters error in ask_string\n");
+        printf("\033[41m\033[1mParameters error in ask_string\n\033[0m");
         exit(1);
     }
 
@@ -30,7 +30,7 @@ void ask_string(char *string, int sizeofanswer, char *answer)
         }
         if (valid != 1) // No idea how a string input couldn't be valid but I still check
         {
-            printf("The input is not valid.\n");
+            printf("\033[1mThe input is not valid.\033[0m\n");
         }
     } while (valid != 1);
 }
@@ -39,7 +39,7 @@ void ask_int(char *string, int *answer)
 {
     if (string == NULL || answer == NULL)
     {
-        printf("Parameters error in ask_int\n");
+        printf("\033[41m\033[1mParameters error in ask_int\033[0m\n");
         exit(1);
     }
 
@@ -52,7 +52,7 @@ void ask_int(char *string, int *answer)
         valid = scanf(" %d", answer);
         if (valid != 1)
         {
-            printf("The number isnt valid.\n");
+            printf("\033[1mThe number isnt valid.\n\033[0m");
             while (c != EOF && c != '\n')
             {
                 c = getchar();
