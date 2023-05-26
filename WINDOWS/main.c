@@ -2,11 +2,20 @@
 
 int main()
 {
+	printf("\033[1m .d8888b. Y88b   d88P      .d8888b.  888    888  .d88888b.  8888888b.  \n");
+    printf("d88P  Y88b Y88b d88P      d88P  Y88b 888    888 d88P\" \"Y88b 888   Y88b \n");
+    printf("888    888  Y88o88P       Y88b.      888    888 888     888 888    888 \n");
+    printf("888          Y888P         \"Y888b.   8888888888 888     888 888   d88P \n");
+    printf("888           888    8888     \"Y88b. 888    888 888     888 8888888P\"  \n");
+    printf("888    888    888               \"888 888    888 888     888 888        \n");
+    printf("Y88b  d88P    888         Y88b  d88P 888    888 Y88b. .d88P 888        \n");
+    printf(" \"Y8888P\"     888          \"Y8888P\"  888    888  \"Y88888P\"  888        \033[0m\n");
+	printf("                                                        \033[1m\033[34m\033[3mLRD Industries\033[0m\n");
 	// Create the GPU array
 	GPU *array = create_GPU_array();
 	if (array == NULL)
 	{
-		printf("GPU *array error.\n");
+		printf("\033[41m\033[1mGPU *array error.\033[0m\n");
 	}
 
 	// Choose mode
@@ -31,7 +40,7 @@ int main()
 		}
 		else
 		{
-			printf("Please enter 'gestion' or 'buy'\n");
+			printf("\033[1mPlease enter 'gestion' or 'buy'\033[0m\n");
 		}
 	} while (answered == 0);
 
