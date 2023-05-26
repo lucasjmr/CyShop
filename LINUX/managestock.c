@@ -4,7 +4,7 @@ void overwrite_stock(GPU *GPUarray) // Deletes all the lines in file and write n
 {
     if (GPUarray == NULL)
     {
-        printf("Parameters error in overwrite_stock\n");
+        printf("\033[41m\033[1mParameters error in overwrite_stock\033[0m\n");
         exit(1);
     }
 
@@ -15,7 +15,7 @@ void overwrite_stock(GPU *GPUarray) // Deletes all the lines in file and write n
     FILE *file = fopen("shop-data/stocks.txt", "w"); // Write access
     if (file == NULL)                                // Check for errors while opening file
     {
-        printf("Could not open stocks file while trying to overwrite it : %s\n", strerror(errno));
+        printf("\033[41m\033[1mCould not open stocks file while trying to overwrite it : %s\033[0m\n", strerror(errno));
         exit(1);
     }
 
@@ -24,7 +24,7 @@ void overwrite_stock(GPU *GPUarray) // Deletes all the lines in file and write n
         check = fprintf(file, "%s %d %d %d %d\n", GPUarray[i].name, GPUarray[i].number, GPUarray[i].quantity, GPUarray[i].price, GPUarray[i].size); // Writes the lines in file
         if (check < 0)
         {
-            printf("Error while trying to overwrite stocks file\n");
+            printf("\033[0mError while trying to overwrite stocks file.\033[0m\n");
             exit(1);
         }
     }
@@ -37,7 +37,7 @@ int number_of_GPU(void) // Returns the number of lines of stocks.txt = number of
     file = fopen("shop-data/stocks.txt", "r");
     if (file == NULL)
     {
-        printf("Could not open stocks file : %s\n", strerror(errno));
+        printf("\033[0mCould not open stocks file : %s\033[0m\n", strerror(errno));
         exit(1);
     }
 
@@ -79,7 +79,7 @@ GPU *create_GPU_array(void) // Returns an array of all GPUs
     array = malloc(nbrGPU * sizeof(GPU));
     if (array == NULL)
     {
-        printf("Memory allocation failed (GPU-ARRAY)\n");
+        printf("\033[41m\033[1mMemory allocation failed (GPU-ARRAY)\033[0m\n");
         exit(1);
     }
 
@@ -87,7 +87,7 @@ GPU *create_GPU_array(void) // Returns an array of all GPUs
     file = fopen("shop-data/stocks.txt", "r");
     if (file == NULL)
     {
-        printf("Could not open stocks file : %s\n", strerror(errno));
+        printf("\033[0mCould not open stocks file : %s\033[0m\n", strerror(errno));
         exit(1);
     }
 
@@ -97,7 +97,7 @@ GPU *create_GPU_array(void) // Returns an array of all GPUs
     }
     if (valid == 0)
     {
-        printf("Error while reading values from stocks.txt.\n");
+        printf("\033[41m\033[1mError while reading values from stocks.txt.\033[0m\n");
         exit(1);
     }
 
@@ -109,7 +109,7 @@ void print_lowstock(GPU *GPUarray)
 {
     if (GPUarray == NULL)
     {
-        printf("Parameters error in print_lowstock\n");
+        printf("\033[41m\033[1mParameters error in print_lowstock\033[0m\n");
         exit(1);
     }
 
@@ -124,7 +124,7 @@ void print_lowstock(GPU *GPUarray)
     GPU *GPUarraycopy = malloc(sizeof(GPU) * size);
     if (GPUarraycopy == NULL)
     {
-        printf("Memory allocation while trying to copy GPUarray failed.\n");
+        printf("\033[41m\033[1mMemory allocation while trying to copy GPUarray failed.\033[0m\n");
         exit(1);
     }
     memcpy(GPUarraycopy, GPUarray, sizeof(GPU) * size); // memcpy(destination, source, number of bytes to copy);
@@ -156,11 +156,11 @@ void print_lowstock(GPU *GPUarray)
         }
         else if (GPUarraycopy[i].quantity == 0)
         {
-            printf("The %s needs to be refilled : 0 in stock !\n", GPUarraycopy[i].name);
+            printf("The \033[0;36m%s\033[0m needs to be refilled : \033[0;31m0\033[0m in stock !\n", GPUarraycopy[i].name);
         }
         else
         {
-            printf("The %s needs to be refilled :  only %d in stock !\n", GPUarraycopy[i].name, GPUarraycopy[i].quantity);
+            printf("The \033[0;36m%s\033[0m needs to be refilled :  only \033[0;33m%d\033[0m in stock !\n", GPUarraycopy[i].name, GPUarraycopy[i].quantity);
             NumberPrinted += 1;
         }
     }
@@ -172,7 +172,7 @@ void print_lowstock(GPU *GPUarray)
     }
     if (taken_space <= 400)
     {
-        printf("Space : %d/400 is taken by GPUs. %d space remaining.\n", taken_space, 400 - taken_space);
+        printf("Space : \033[0;32m%d/400\033[0m is taken by GPUs. \033[0;32m%d\033[0m space remaining.\n", taken_space, 400 - taken_space);
     }
     else if (taken_space > 400)
     {
@@ -186,7 +186,7 @@ void search_refill_stock(GPU *GPUarray)
 {
     if (GPUarray == NULL)
     {
-        printf("Parameters error in search_refill_stock\n");
+        printf("\033[41m\033[1mParameters error in search_refill_stock\033[0m\n");
         exit(1);
     }
 
@@ -209,12 +209,12 @@ void search_refill_stock(GPU *GPUarray)
 
             if (!strcmp(int_to_string, input) || !strcmp(GPUarray[i].name, input)) // search for GPU with wanted name or wanted number
             {
-                printf("%s FOUND \xF8o\xF8, %d in stock\n", GPUarray[i].name, GPUarray[i].quantity);
+                printf("\033[0;36m%s\033[0m FOUND \xF8o\xF8, \033[1m%d\033[0m in stock\n", GPUarray[i].name, GPUarray[i].quantity);
                 found = 1;
 
                 do
                 {
-                    ask_string("Do you want to modify the value in stock ? (y/n) : ", sizeof(yes_or_no), yes_or_no);
+                    ask_string("Do you want to modify the value in stock ? (\033[32my\033[0m/\033[31mn\033[0m) : ", sizeof(yes_or_no), yes_or_no);
                     if (!strcmp(yes_or_no, "y"))
                     {
                         for (int j = 0; j < size; j++) // Calculates the space taken by all GPUs in stock
@@ -226,14 +226,14 @@ void search_refill_stock(GPU *GPUarray)
                             ask_int("How much GPU do you want to add to the stock ? : ", &GPUtoadd);
                             if (GPUtoadd < 1 || GPUtoadd > 100)
                             {
-                                printf("Exiting program, sabotage attempt detected. The next time it happens, I crash your computer using infinite loop memory allocation.\n");
+                                printf("\033[41m\033[1mExiting program, sabotage attempt detected. The next time it happens, I crash your computer using infinite loop memory allocation.\n\033[0m");
                                 exit(1);
                             }
                             else
                             {
                                 if ((GPUtoadd * GPUarray[i].size) + taken_space > 400)
                                 {
-                                    printf("The number of GPUs you're trying to restock is too high !\n");
+                                    printf("The number of GPUs you're trying to restock is \033[0;31m too high \033[0m !\n");
                                 }
                                 else
                                 {
@@ -252,14 +252,14 @@ void search_refill_stock(GPU *GPUarray)
                     }
                     else
                     {
-                        printf("Please answer \"y\" or \"n\"\n"); // Backslashes are before " to include them in the string : \"
+                        printf("\033[1mYou need to enter '\033[32my\033[0m' or '\033[31mn\033[0m'.\n"); // Backslashes are before " to include them in the string : \"
                     }
                 } while (answered == 0);
             }
         }
         if (!found)
         {
-            printf("No GPU with the name or the number you gave have been found.\n");
+            printf("\033[1mNo GPU with the name or the number you gave have been found.\n\033[0m");
         }
     } while (found == 0);
 }
