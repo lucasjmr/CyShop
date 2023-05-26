@@ -8,14 +8,14 @@ int client_number_to_assign()
     FILE *file = fopen("shop-data/number_of_client.txt", "r");
     if (file == NULL)
     {
-        printf("Coudn't open number_of_client.txt file : %s\n", strerror(errno));
+        printf("\033[41m\033[1mCoudn't open number_of_client.txt file : %s\033[0m\n", strerror(errno));
         exit(1);
     }
 
     valid &= (fscanf(file, "%d", &number_client) == 1);
     if (valid == 0)
     {
-        printf("Couldn't read number_of_client.txt file.\n");
+        printf("\033[41m\033[1mCouldn't read number_of_client.txt file.\033[0m\n");
         exit(1);
     }
 
@@ -35,13 +35,13 @@ int is_client()
 
     while (1)
     {
-        ask_string("Are you a new client ? (y/n) : ", sizeof(answer), answer);
+        ask_string("Are you a new client ? (\033[32my\033[0m/\033[31mn\033[0m) : ", sizeof(answer), answer);
         if (!strcmp("y", answer))
         {
             // gets the name without the spaces
             do
             {
-                ask_string("Enter your name (without spaces) : ", sizeof(name), name);
+                ask_string("Enter your \033[0;32mname\033[0m (without spaces) : ", sizeof(name), name);
                 if (strchr(name, ' ') == NULL) // Useless because scanf doesnt store data after the spaces. Still check ...
                 {
                     test = 1;
@@ -54,24 +54,23 @@ int is_client()
             } while (test == 0);
 
             // gets other info :
-            ask_int("Enter your age : ", &age);
+            ask_int("Enter your \033[0;32mage\033[0m : ", &age);
 
             // creates client
             create_client(name, age, number);
-            printf("Your client number is %d. Keep it in mind !\n", number);
-
+            printf("Your client number is \033[1;33m%d\033[0m. \033[0;31mKeep it in mind !\033[0m\n", number);
             // Adds 1 to the number_of_client.txt file. So future clients will get different number.
             FILE *file = fopen("shop-data/number_of_client.txt", "w");
             if (file == NULL)
             {
-                printf("Failed to open number_of_client.txt file.\n");
+                printf("\033[41m\033[1mFailed to open number_of_client.txt file.\033[0m\n");
                 exit(1);
             }
 
             valid = fprintf(file, "%d", number);
             if (valid != 1)
             {
-                printf("Writing in number_of_client.txt failed.\n");
+                printf("\033[41m\033[1mWriting in number_of_client.txt failed.\033[0m\n");
                 exit(1);
             }
             fclose(file);
@@ -80,12 +79,12 @@ int is_client()
         }
         else if (!strcmp("n", answer))
         {
-            ask_int("Please provide your client number : ", &known_number);
+            ask_int("Please provide your \033[1;33mclient number\033[0m : ", &known_number);
             return known_number;
         }
         else
         {
-            printf("You must enter 'y' or 'n'.\n");
+            printf("\033[1mYou must enter '\033[32my\033[0m' or '\033[41mn\033[0m'.\n");
         }
     }
 }
@@ -94,7 +93,7 @@ void create_client(char *name, int age, int client_number) // Creates a file for
 {
     if (name == NULL || age <= 0 || client_number < 0)
     {
-        printf("Parameters error in create_client\n");
+        printf("\033[41m\033[1mParameters error in create_client\033[0m\n");
         exit(1);
     }
 
@@ -109,7 +108,8 @@ void create_client(char *name, int age, int client_number) // Creates a file for
     file = fopen(format, "w");
     if (file == NULL)
     {
-        printf("Failed to create client file : %s\n", strerror(errno));
+        printf("\033[41m\033[1mFailed to create client file : %s\033[0m\n", strerror(errno));
+        exit(1);
     }
 
     // Write the values
@@ -117,7 +117,7 @@ void create_client(char *name, int age, int client_number) // Creates a file for
     check = fprintf(file, "%s %d %d\n", name, age, client_number); // Dont forget \n to append values easier later
     if (check < 0)
     {
-        printf("Error while trying to write string in client file.\n");
+        printf("\033[41m\033[1mError while trying to write string in client file.\033[0m\n");
         exit(1);
     }
     fclose(file);
@@ -127,7 +127,7 @@ void delete_client(int client_number) // Deletes client file
 {
     if (client_number < 0)
     {
-        printf("Parameters error in delete_client\n");
+        printf("\033[41m\033[1mParameters error in delete_client.\033[0m\n");
         exit(1);
     }
 
@@ -140,7 +140,8 @@ void delete_client(int client_number) // Deletes client file
     check = remove(format);
     if (check != 0)
     {
-        printf("Failed to delete client file.\n");
+        printf("\033[41m\033[1mFailed to delete client file.\033[0m\n");
+        exit(1);
     }
 }
 
@@ -148,7 +149,7 @@ int number_of_buys(int client_number) // Returns the number of lines of shop-dat
 {
     if (client_number < 0)
     {
-        printf("Parameters error in number_of_buys\n");
+        printf("\033[41m\033[1mParameters error in number_of_buys.\033[0m\n");
         exit(1);
     }
 
@@ -164,7 +165,7 @@ int number_of_buys(int client_number) // Returns the number of lines of shop-dat
     file = fopen(format, "r");
     if (file == NULL)
     {
-        printf("Could not open client file : %s\n", strerror(errno));
+        printf("\033[41m\033[1mCould not open client file : %s/wrong client_number\033[0m\n", strerror(errno));
         exit(1);
     }
 
@@ -199,7 +200,7 @@ void print_last_buy(int client_number)
 {
     if (client_number < 0)
     {
-        printf("Parameters error in print_last_buy\n");
+        printf("\033[41m\033[1mParameters error in print_last_buy.\033[0m\n");
         exit(1);
     }
 
@@ -216,7 +217,7 @@ void print_last_buy(int client_number)
     file = fopen(format, "r");
     if (file == NULL)
     {
-        printf("Error while trying to open client file : %s\n", strerror(errno));
+        printf("\033[41m\033[1mError while trying to open client file : %s\033[0m\n", strerror(errno));
         exit(1);
     }
 
@@ -232,10 +233,10 @@ void print_last_buy(int client_number)
         valid &= (fscanf(file, "%s", buy1) == 1);
         if (valid == 0)
         {
-            printf("Error while trying to read the last GPU bought.\n");
+            printf("\033[41m\033[1mError while trying to read the last GPU bought.\033[0m\n");
             exit(1);
         }
-        printf("Welcome back. You bought %s before.\n", buy1);
+        printf("Welcome back. You bought \033[0;36m %s \033[0m before.\n", buy1);
         break;
     case 2:
         valid &= (fscanf(file, "%*[^\n]%*c") == 0); // Skip first line
@@ -243,10 +244,10 @@ void print_last_buy(int client_number)
         valid &= (fscanf(file, "%s", buy2) == 1);
         if (valid == 0)
         {
-            printf("Error while trying to read the last GPU bought.\n");
+            printf("\033[41m\033[1mError while trying to read the last GPU bought.\033[0m\n");
             exit(1);
         }
-        printf("Welcome back. You bought %s and %s before.\n", buy1, buy2);
+        printf("Welcome back. You bought \033[0;36m%s\033[0m and \033[0;36m%s\033[0m before.\n", buy1, buy2);
         break;
     case 3:
         valid &= (fscanf(file, "%*[^\n]%*c") == 0); // Skip first line
@@ -255,10 +256,10 @@ void print_last_buy(int client_number)
         valid &= (fscanf(file, "%s", buy3) == 1);
         if (valid == 0)
         {
-            printf("Error while trying to read the last GPU bought.\n");
+            printf("\033[41m\033[1mError while trying to read the last GPU bought.\033[0m\n");
             exit(1);
         }
-        printf("Welcome back. You bought %s, %s, and %s before <3.\n", buy1, buy2, buy3);
+        printf("Welcome back. You bought \033[0;36m%s\033[0m, \033[0;36m%s\033[0m, and \033[0;36m%s\033[0m before <3.\n", buy1, buy2, buy3);
     default:
         if (buys > 3)
         {
@@ -272,10 +273,10 @@ void print_last_buy(int client_number)
             valid &= (fscanf(file, "%s", buy3) == 1);
             if (valid == 0)
             {
-                printf("Error while trying to read the last GPU bought.\n");
+                printf("\033[41m\033[1mError while trying to read the last GPU bought.\033[0m\n");
                 exit(1);
             }
-            printf("Welcome back. You bought %s, %s, and %s before <3.\n", buy1, buy2, buy3);
+            printf("Welcome back. You bought \033[0;36m%s\033[0m, \033[0;36m%s\033[0m, and \033[0;36m%s\033[0m before <3.\n", buy1, buy2, buy3);
         }
     }
 
@@ -286,7 +287,7 @@ void client_gpu_append(char *string, int client_number) // Appends gpu name in c
 {
     if (string == NULL || client_number < 0)
     {
-        printf("Parameters error in client_gpu_append\n");
+        printf("\033[41m\033[1mParameters error in client_gpu_append\033[0m\n");
         exit(1);
     }
 
@@ -298,13 +299,13 @@ void client_gpu_append(char *string, int client_number) // Appends gpu name in c
     file = fopen(format, "a");
     if (file == NULL)
     {
-        printf("Error while trying to open client file : %s\n", strerror(errno));
+        printf("\033[41m\033[1mError while trying to open client file : %s\033[0m\n", strerror(errno));
         exit(1);
     }
     check = fprintf(file, "%s\n", string); // appends gpu name to the client file
     if (check < 0)
     {
-        printf("Error while trying to append GPU name in client file.\n");
+        printf("\033[41m\033[1mError while trying to append GPU name in client file.\033[0m\n");
         exit(1);
     }
 
@@ -315,7 +316,7 @@ void search_and_buy(GPU *GPUarray, int client_number)
 {
     if (GPUarray == NULL || client_number < 0)
     {
-        printf("Parameters error in search_and_buy\n");
+        printf("\033[41m\033[1mParameters error in search_and_buy\033[0m\n");
         exit(1);
     }
 
@@ -336,15 +337,15 @@ void search_and_buy(GPU *GPUarray, int client_number)
                 found = 1;
                 if (GPUarray[i].quantity == 0)
                 {
-                    printf("The %s isn't in stock :(\n", GPUarray[i].name);
+                    printf("The \033[1;31m%s\033[0m isn't in stock :(\n", GPUarray[i].name);
 
                     do
                     {
-                        ask_string("If you are not satisfied, you can unsubsribe from our database (y/n) : ", sizeof(y_or_n), y_or_n);
+                        ask_string("If you are not satisfied, you can unsubsribe from our database (\033[32my\033[0m/\033[31mn\033[0m) : ", sizeof(y_or_n), y_or_n);
                         if (!strcmp("y", y_or_n))
                         {
                             delete_client(client_number);
-                            printf("You have been deleted from database.\n");
+                            printf("\033[1mYou have been deleted from database.\033[0m\n");
                             answered = 1;
                         }
                         else if (!strcmp("n", y_or_n))
@@ -354,7 +355,7 @@ void search_and_buy(GPU *GPUarray, int client_number)
                         }
                         else
                         {
-                            printf("You need to enter 'y' or 'n'\n");
+                            printf("\033[1mYou need to enter '\033[32my\033[0m' or '\033[31mn\033[0m'.\n");
                         }
                     } while (answered == 0);
                 }
@@ -362,9 +363,9 @@ void search_and_buy(GPU *GPUarray, int client_number)
                 {
                     do
                     {
-                        printf("%d %s are in stock. ", GPUarray[i].quantity, GPUarray[i].name);
+                        printf("\033[1m%d\033[1;36m %s\033[0m are in stock.", GPUarray[i].quantity, GPUarray[i].name);
 
-                        ask_string("Would you like to buy one ? (y/n) : ", sizeof(y_or_n), y_or_n);
+                        ask_string("Would you like to buy one ? (\033[32my\033[0m/\033[31mn\033[0m) : ", sizeof(y_or_n), y_or_n);
                         if (!strcmp("n", y_or_n))
                         {
                             printf("You are right, Nvidia Gpus are way too expensive for the performance. AMD is better ;)\n");
@@ -375,12 +376,12 @@ void search_and_buy(GPU *GPUarray, int client_number)
                             client_gpu_append(WantedGPU, client_number);
                             GPUarray[i].quantity -= 1;
                             overwrite_stock(GPUarray);
-                            printf("You successfully bought it for %d euro, \xF8o\xF8\n", GPUarray[i].price);
+                            printf("You successfully bought it for \033[0;32m%d\033[0m, \xF8o\xF8\n", GPUarray[i].price);
                             answered = 1;
                         }
                         else
                         {
-                            printf("You need to enter 'y' or 'n'\n");
+                            printf("\033[1mYou need to enter '\033[32my\033[0m' or '\033[31mn\033[0m'.\n");
                         }
                     } while (answered == 0);
                 }
@@ -388,7 +389,7 @@ void search_and_buy(GPU *GPUarray, int client_number)
         }
         if (found == 0)
         {
-            printf("No GPU with this name have been found.\n");
+            printf("\033[1mNo GPU with this name have been found.\033[0m\n");
         }
     } while (found == 0);
 }
