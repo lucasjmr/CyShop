@@ -6,11 +6,10 @@ Mi6 preing1
 
 
 ## Badges
-![LICENSE](https://img.shields.io/badge/PROJECT%20NAME-CY--SHOP-green/?style=for-the-badge&logo=appveyor) ![TOTAL LINES](https://img.shields.io/tokei/lines/github/lucasjmr/CyShop?style=for-the-badge)
+![TOTAL LINES](https://img.shields.io/tokei/lines/github/lucasjmr/CyShop?style=for-the-badge)![LAST COMMIT](https://img.shields.io/github/commit-activity/y/lucasjmr/CyShop?style=for-the-badge)![STARS](https://img.shields.io/github/stars/lucasjmr/Cy-Shop?style=for-the-badge)
 
-![LAST COMMIT](https://img.shields.io/github/commit-activity/y/lucasjmr/CyShop?style=for-the-badge)
+![PROJECT NAME](https://img.shields.io/badge/PROJECT%20NAME-CY--SHOP-green/?style=for-the-badge&logo=appveyor) 
 
-![STARS](https://img.shields.io/github/stars/lucasjmr/Cy-Shop?style=for-the-badge)
 ## How to use
 GCC and MAKE are needed.
 
