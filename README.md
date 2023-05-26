@@ -6,31 +6,37 @@ Mi6 preing1
 
 
 ## Badges
-![LICENSE](https://img.shields.io/badge/LICENSE-GIGACHADS-red) 
+![LICENSE](https://img.shields.io/badge/PROJECT%20NAME-CY--SHOP-green/?style=for-the-badge&logo=appveyor)
 
-## FAQ
+![TOTAL LINES](https://img.shields.io/tokei/lines/github/lucasjmr/CyShop?style=for-the-badge)
 
-#### Is the project robust as rock ?
+![LAST COMMIT](https://img.shields.io/github/commit-activity/y/lucasjmr/CyShop?style=for-the-badge)
 
-Ofc.
+![STARS](https://img.shields.io/github/stars/lucasjmr/Cy-Shop?style=for-the-badge)
+## How to use
+GCC and MAKE are needed.
 
-#### Is the code fabulous ?
+How to compile and run on LINUX : 
 
-Ofc.
+```bash
+  make all
+  ./program
+```
+How to compile and run on WINDOWS :
+```bash
+  make all
+  .\program
+```
+## Documentation
+
+The program lets you manage the stocks of a shop, or be a client. 
+- There are 2 modes : gestion and buy
+
+- Gestion : you can search for the products (by name or number id)and add more to the stock. 
+- Buy : You are the client, you will have an account : it will memorize all your buys. You can search for a product and buy it. If you don't find it, and are angry, you can delete your client account. 
 
 
-## Used By
 
-This project is used by the following companies:
+## Approved by °o°
 
-- Amazon
-- Google
-- Microsoft
-- Not Apple, because Apple sucks
-
-(sources : trust me bro)
-
-## Screenshots
-
-![App Screenshot](https://risibank.fr/cache/medias/0/1/199/19938/full.gif)
-
+![Approved by THE ROCK](https://i.imgur.com/CxFMN2w.png)
