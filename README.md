@@ -30,7 +30,7 @@ How to compile and run on WINDOWS :
 The program lets you manage the stocks of a shop, or be a client. 
 - There are 2 modes : gestion and buy
 
-- Gestion : you can search for the products (by name or number id)and add more to the stock. 
+- Gestion : you can search for the products (by name or number id) and add more to the stock. 
 - Buy : You are the client, you will have an account : it will memorize all your buys. You can search for a product and buy it. If you don't find it, and are angry, you can delete your client account. 
 
 
