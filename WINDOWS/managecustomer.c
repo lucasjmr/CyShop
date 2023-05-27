@@ -291,7 +291,7 @@ void client_gpu_append(char *string, int client_number) // Appends gpu name in c
         exit(1);
     }
 
-    char format[16];
+    char format[32];
     int check = 1;
     sprintf(format, "shop-data/client-%d.txt", client_number);
 
